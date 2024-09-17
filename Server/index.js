@@ -13,7 +13,8 @@ const port = 5000
 const upload = multer({ storage: multer.memoryStorage() })
 const storage = getStorage(fire_store);
 
-app.use(cors({ credentials: true, origin: ['http://localhost:3000'], methods: ['POST', 'GET'] }))
+// app.use(cors({ credentials: true, origin: ['http://localhost:3000'], methods: ['POST', 'GET'] }))
+app.use(cors({ credentials: true, origin: ['https://my-blogs-mernclient.vercel.app'], methods: ['POST', 'GET'] }))
 app.use(express.json())
 
 import('./conn/conn_mongo.js')
