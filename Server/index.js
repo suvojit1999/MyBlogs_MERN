@@ -23,6 +23,7 @@ app.use(cors({
 
 app.use(express.json())
 
+
 import('./conn/conn_mongo.js')
 
 app.get('/getData', async (req, res) => {
