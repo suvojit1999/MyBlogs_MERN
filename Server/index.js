@@ -14,12 +14,13 @@ const upload = multer({ storage: multer.memoryStorage() })
 const storage = getStorage(fire_store);
 
 // app.use(cors({ credentials: true, origin: ['http://localhost:3000'], methods: ['POST', 'GET'] }))
-app.use(cors({
-  origin: ['https://my-blogs-mernclient.vercel.app', 'https://my-blogs-mern.vercel.app'], 
-  credentials: true,
-  methods: ['POST', 'GET', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//   origin: ['https://my-blogs-mernclient.vercel.app', 'https://my-blogs-mern.vercel.app'], 
+//   credentials: true,
+//   methods: ['POST', 'GET', 'PUT', 'DELETE'], 
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+app.use(cors())
 
 app.use(express.json())
 

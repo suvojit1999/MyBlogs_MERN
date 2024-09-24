@@ -22,8 +22,8 @@ const Blog = () => {
 
     //Get one post data
     const GetPostData = async (params) => {
-        // const response = await fetch(`http://localhost:5000/blog/${params.id}`);
-        const response = await fetch(`https://my-blogs-mern.vercel.app/blog/${params.id}`);
+        const response = await fetch(`http://localhost:5000/blog/${params.id}`);
+        // const response = await fetch(`https://my-blogs-mern.vercel.app/blog/${params.id}`);
         const data = await response.json();
         setPostData(data);
         console.log(data);
@@ -31,14 +31,14 @@ const Blog = () => {
 
     const DeletePost = async () =>{
         try {
-            const response = await fetch(`https://my-blogs-mern.vercel.app/deletepost/${params.id}`, {
-              method: 'DELETE',
-              credentials: 'include',
-            });
-            // const response = await fetch(`http://localhost:5000/deletepost/${params.id}`, {
+            // const response = await fetch(`https://my-blogs-mern.vercel.app/deletepost/${params.id}`, {
             //   method: 'DELETE',
             //   credentials: 'include',
             // });
+            const response = await fetch(`http://localhost:5000/deletepost/${params.id}`, {
+              method: 'DELETE',
+              credentials: 'include',
+            });
             const responseData = await response.json();
         
             if (response.ok) {

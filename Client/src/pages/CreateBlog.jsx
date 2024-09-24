@@ -31,16 +31,16 @@ const CreateBlog = () => {
 
       try {
         setLoading(!loading)
-        // const response = await fetch('http://localhost:5000/CreatePost', {
-        //   method: 'POST',
-        //   body: data,
-        //   credentials: 'include',
-        // })
-        const response = await fetch('https://my-blogs-mern.vercel.app/CreatePost', {
+        const response = await fetch('http://localhost:5000/CreatePost', {
           method: 'POST',
           body: data,
           credentials: 'include',
         })
+        // const response = await fetch('https://my-blogs-mern.vercel.app/CreatePost', {
+        //   method: 'POST',
+        //   body: data,
+        //   credentials: 'include',
+        // })
         const responseData = await response.json();
         console.log(responseData.message)
         // toast(responseData.message)
