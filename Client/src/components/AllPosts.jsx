@@ -26,8 +26,8 @@ const AllPosts = () => {
     }, []);
 
     const getAllPosts = async () => {
-        // const response = await fetch('https://my-blogs-mern.vercel.app/getData');
-        const response = await fetch('http://localhost:5000/getData');
+        const response = await fetch('https://myblogs-mern-eg1e.onrender.com/getData');
+        // const response = await fetch('http://localhost:5000/getData');
         const data = await response.json();
         setAllPosts(data);
         console.log(data);
