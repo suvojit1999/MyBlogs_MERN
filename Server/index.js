@@ -21,8 +21,20 @@ const storage = getStorage(fire_store);
 //   methods: ['POST', 'GET', 'PUT', 'DELETE'], 
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
-app.use(cors())
-app.options('*', cors());
+
+app.use(cors({
+  origin: ['https://sensational-yeot-56ca15.netlify.app'], // Add your frontend origin here
+  credentials: true, // Enable credentials for CORS
+}));
+app.options('*', cors({
+  origin: ['https://sensational-yeot-56ca15.netlify.app'],
+  credentials: true,
+}));
+
+
+
+// app.use(cors())
+// app.options('*', cors());
 
 app.use(express.json())
 
@@ -43,50 +55,50 @@ app.get('/blog/:id', async (req, res) => {
 })
 
 app.post('/CreatePost', upload.single('file'), async (req, res) => {
-  if(req.file){
+  if (req.file) {
     try {
       const filedata = req.file;
       const { user, email, title, content } = req.body;
       console.log(filedata, user, email, title, content)
-  
-  
+
+
       const timestamp = format(new Date(), 'yyyyMMdd_HHmmss');
       const fileName = `${filedata.originalname.split('.')[0]}_${timestamp}.${filedata.originalname.split('.').pop()}`;
-  
+
       try {
         const storageRef = ref(storage, `uploads/${fileName}`);
         await uploadBytes(storageRef, filedata.buffer);
-  
+
         const downloadURL = await getDownloadURL(storageRef);
         console.log(`File uploaded to Firebase: ${downloadURL}`, user, email, title, content);
-  
+
         try {
           const NewPostData = new postData({ email, title, content, imageUrl: downloadURL, user })
           const result = await NewPostData.save()
-  
+
           console.log(result)
-  
-  
+
+
           return res.status(200).json({ message: 'Post uploaded to server successfully' });
-  
-  
+
+
         } catch (err) {
           console.error('Error saving post to the database:', err);
           return res.status(500).json({ error: 'Upload to database failed', details: err.message });
         }
-  
+
       } catch (err) {
         console.error('Error uploading file to Firebase:', err);
         return res.status(500).json({ error: 'File upload failed', details: err.message });
       }
-  
-  
+
+
     } catch (err) {
       console.error('Error processing the request:', err);
       return res.status(500).json({ error: 'Upload failed', details: err.message });
     }
   }
-  else{
+  else {
     const { user, email, title, content } = req.body;
 
     try {
@@ -107,6 +119,11 @@ app.post('/CreatePost', upload.single('file'), async (req, res) => {
 })
 
 app.delete('/deletepost/:id', async (req, res) => {
+
+  res.header("Access-Control-Allow-Origin", "https://sensational-yeot-56ca15.netlify.app");
+  res.header("Access-Control-Allow-Credentials", "true");
+
+
   const id = req.params.id;
 
   try {
