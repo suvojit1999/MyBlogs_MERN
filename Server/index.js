@@ -22,6 +22,7 @@ const storage = getStorage(fire_store);
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 app.use(cors())
+app.options('*', cors());
 
 app.use(express.json())
 
